@@ -6,27 +6,27 @@ import java.util.Scanner;
  * Hello world!
  */
 public class App {
-    private static double calculate(double a, double b, String op){
+    private static double calculate(double firstNumber, double secondNumber, String op){
         return switch(op){
-            case "+" -> a + b;
-            case "-" -> a - b;
-            case "*" -> a * b;
+            case "+" -> firstNumber + secondNumber;
+            case "-" -> firstNumber - secondNumber;
+            case "*" -> firstNumber * secondNumber;
             case "/" -> {
-                if(b == 0) {
+                if(secondNumber == 0) {
                     System.out.println("Cannot divide by zero");
                     yield Double.NaN;
                 }
                 else{
-                    yield a / b;
+                    yield firstNumber / secondNumber;
                 }
             }
             case "%" -> {
-                if(b == 0) {
+                if(secondNumber == 0) {
                     System.out.println("Cannot divide by zero");
                     yield Double.NaN;
                 }
                 else{
-                    yield a % b;
+                    yield firstNumber % secondNumber;
                 }
             }
             default -> {
@@ -54,10 +54,10 @@ public class App {
             String op = sc.nextLine().trim();
 
             try {
-                double a = Double.parseDouble(firstNumber);
-                double b = Double.parseDouble(secondNumber);
+                double firstNumberDouble = Double.parseDouble(firstNumber);
+                double secondNumberDouble = Double.parseDouble(secondNumber);
 
-                double result = calculate(a, b, op);
+                double result = calculate(firstNumberDouble, secondNumberDouble, op);
 
                 if(!Double.isNaN(result)) {
                     System.out.printf("Result: %.2f%n", result);
