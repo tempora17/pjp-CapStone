@@ -6,6 +6,36 @@ import java.util.Scanner;
  * Hello world!
  */
 public class App {
+    private static double calculate(double a, double b, String op){
+        return switch(op){
+            case "+" -> a + b;
+            case "-" -> a - b;
+            case "*" -> a * b;
+            case "/" -> {
+                if(b == 0) {
+                    System.out.println("Cannot divide by zero");
+                    yield Double.NaN;
+                }
+                else{
+                    yield a / b;
+                }
+            }
+            case "%" -> {
+                if(b == 0) {
+                    System.out.println("Cannot divide by zero");
+                    yield Double.NaN;
+                }
+                else{
+                    yield a % b;
+                }
+            }
+            default -> {
+                System.out.println("Invalid operator input");
+                yield Double.NaN;
+            }
+        };
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to My Smart Calculator");
@@ -27,33 +57,7 @@ public class App {
                 double a = Double.parseDouble(firstNumber);
                 double b = Double.parseDouble(secondNumber);
 
-                double result = switch(op){
-                    case "+" -> a + b;
-                    case "-" -> a - b;
-                    case "*" -> a * b;
-                    case "/" -> {
-                        if(b == 0) {
-                            System.out.println("Cannot divide by zero");
-                            yield Double.NaN;
-                        }
-                        else{
-                            yield a / b;
-                        }
-                    }
-                    case "%" -> {
-                        if(b == 0) {
-                            System.out.println("Cannot divide by zero");
-                            yield Double.NaN;
-                        }
-                        else{
-                            yield a % b;
-                        }
-                    }
-                    default -> {
-                        System.out.println("Invalid operator input");
-                        yield Double.NaN;
-                    }
-                };
+                double result = calculate(a, b, op);
 
                 if(!Double.isNaN(result)) {
                     System.out.printf("Result: %.2f%n", result);
