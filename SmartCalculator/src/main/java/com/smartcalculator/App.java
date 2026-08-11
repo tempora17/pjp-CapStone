@@ -2,8 +2,10 @@ package com.smartcalculator;
 
 import java.util.Scanner;
 
-/**
- * Hello world!
+/*
+Input: First Number: 10, Second Number: 3, Operator: + -> Expected Output: 13
+Input: First Number: 10, Second Number: 0, Operator: / -> Expected Output: Error: Cannot divide by zero
+Input: First Number: 10, Second Number: 3, Operator: ^ -> Expected Output: Error: Invalid operator input "^"
  */
 public class App {
     private static double calculate(double firstNumber, double secondNumber, String op){
@@ -13,7 +15,7 @@ public class App {
             case "*" -> firstNumber * secondNumber;
             case "/" -> {
                 if(secondNumber == 0) {
-                    System.out.println("Cannot divide by zero");
+                    System.out.println("Error: Cannot divide by zero");
                     yield Double.NaN;
                 }
                 else{
@@ -22,7 +24,7 @@ public class App {
             }
             case "%" -> {
                 if(secondNumber == 0) {
-                    System.out.println("Cannot divide by zero");
+                    System.out.println("Error: Cannot divide by zero");
                     yield Double.NaN;
                 }
                 else{
@@ -30,7 +32,7 @@ public class App {
                 }
             }
             default -> {
-                System.out.println("Invalid operator input");
+                System.out.println("Error: Invalid operator input \"" + op + "\"");
                 yield Double.NaN;
             }
         };
