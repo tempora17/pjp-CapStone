@@ -2,26 +2,28 @@ package com.smartcalculator.Week4;
 
 public class Demo {
     public static void main(String[] args) {
-//        creating two account
-        BankAccount account1 = new BankAccount("1001", "Alice", 5000.0);
-        BankAccount account2 = new BankAccount("1002", "Bob", 3000.0);
+        BankAccount account = new BankAccount("1001", "Alice", 300000.0);
+//         Normal transactions
+        account.deposit(50000.0);
+        account.withdraw(20000.0);
 
-        System.out.println("Account 1 Operations");
-        account1.deposit(1000.0);
-        account1.withdraw(500.0);
-//        Invalid operation
-        account1.withdraw(10000.0);
+        account.deposit(BankConfig.MAX_DEPOSIT + 1);
+        account.withdraw(-5000.0);
+        account.withdraw(BankConfig.MAX_WITHDRAWAL + 1);
 
-        System.out.println("Account 2 Operations");
-        account2.deposit(2000.0);
-        account2.withdraw(1000.0);
+        System.out.println(account);
 
-//        Invalid operation
-        account2.deposit(-500.0);
+//        Daily transaction limit
+        BankAccount transactionAccount = new BankAccount("2001", "Bob", 100000.0);
+        for (int i = 0; i < BankConfig.MAX_DAILY_TXN; i++) {
+            transactionAccount.deposit(1000.0);
+        }
+//        11th transaction
+        transactionAccount.deposit(1000.0);
+        System.out.println(transactionAccount);
 
-        System.out.println("Finally Account Details");
-        System.out.println(account1);
-        System.out.println(account2);
 
+        var loanAmount = LoanUtils.calculateLoanAmount( 100000.0, 12.0, 2 );
+        System.out.println("Loan amount: Rs." + loanAmount);
     }
 }

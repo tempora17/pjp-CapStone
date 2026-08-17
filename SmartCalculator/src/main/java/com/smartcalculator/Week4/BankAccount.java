@@ -26,6 +26,14 @@ public class BankAccount {
             System.out.println("Invalid deposit: amount must be greater than Rs.0.");
             return;
         }
+        if (amount > BankConfig.MAX_DEPOSIT) {
+            System.out.println("Invalid deposit: maximum deposit is Rs." + BankConfig.MAX_DEPOSIT);
+            return;
+        }
+        if (transactionCount >= BankConfig.MAX_DAILY_TXN) {
+            System.out.println("Invalid deposit: daily transaction limit reached.");
+            return;
+        }
         balance += amount;
         transactionCount++;
         System.out.println("Deposit : Rs." + amount);
@@ -37,8 +45,16 @@ public class BankAccount {
             System.out.println("Invalid withdrawal: amount must be greater than Rs.0.");
             return;
         }
+        if (amount > BankConfig.MAX_WITHDRAWAL) {
+            System.out.println("Invalid withdrawal: maximum withdrawal is Rs." + BankConfig.MAX_WITHDRAWAL);
+            return;
+        }
         if (amount > balance) {
             System.out.println("Invalid withdrawal: insufficient balance.");
+            return;
+        }
+        if (transactionCount >= BankConfig.MAX_DAILY_TXN) {
+            System.out.println("Invalid withdrawal: daily transaction limit reached.");
             return;
         }
         balance -= amount;
