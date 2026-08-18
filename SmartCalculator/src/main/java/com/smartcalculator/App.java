@@ -6,11 +6,15 @@ import org.slf4j.LoggerFactory;
 import java.util.Scanner;
 
 /**
- * Hello world!
+ * Entry point for the Smart Calculator CLI application
  */
 public class App {
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
+    /**
+     * Starts the Smart Calculator application
+     * @param args command line argument
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         LOG.info("Welcome to My Smart Calculator");
