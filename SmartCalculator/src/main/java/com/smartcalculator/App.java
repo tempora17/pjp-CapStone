@@ -13,37 +13,45 @@ public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to My Smart Calculator");
-        System.out.println("Type 'exit' to quit.");
+        LOG.info("Welcome to My Smart Calculator");
+        LOG.info("Type 'exit' to quit.");
 
         while(true) {
-            System.out.print("Enter first number (or 'exit'): ");
+            LOG.info("Enter first number (or 'exit'): ");
             String firstNumber = sc.nextLine().trim();
             if(firstNumber.equalsIgnoreCase("exit")) {
                 break;
             }
-            System.out.print("Enter second number: ");
+            LOG.info("Enter second number: ");
             String secondNumber = sc.nextLine().trim();
 
-            System.out.print("Enter operator (+ - * / %): ");
+            LOG.info("Enter operator (+ - * / %): ");
             String operator = sc.nextLine().trim();
 
-            try {
-                double firstNumberDouble = Double.parseDouble(firstNumber);
-                double secondNumberDouble = Double.parseDouble(secondNumber);
+            double firstNumberDouble,  secondNumberDouble;
 
-                Operation operation = new Operation(firstNumberDouble, secondNumberDouble, operator);
-
-                double result = Calculator.calculate(operation);
-
-                if(!Double.isNaN(result)) {
-                    System.out.printf("Result: %.2f%n", result);
-                }
-            }catch(NumberFormatException e) {
-                System.out.println("Please enter a valid number");
+            try{
+                firstNumberDouble = Double.parseDouble(firstNumber);
+            } catch (NumberFormatException e){
+                LOG.warn("Please enter a valid number");
                 continue;
             }
+
+            try{
+                secondNumberDouble = Double.parseDouble(secondNumber);
+            } catch (NumberFormatException e){
+                LOG.warn("Please enter a valid number");
+                continue;
+            }
+
+            Operation operation = new Operation(firstNumberDouble, secondNumberDouble, operator);
+            double result = Calculator.calculate(operation);
+            if(!Double.isNaN(result)) {
+                LOG.info(String.format("Result: %.2f%n", result));
+            }
+
         }
-        System.out.println("GoodBye:)");
+        LOG.info("GoodBye:)");
+        sc.close();
     }
 }

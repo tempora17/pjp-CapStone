@@ -1,6 +1,11 @@
 package com.smartcalculator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Calculator {
+
+    public static final Logger LOG = LoggerFactory.getLogger(Calculator.class);
 
     public static double calculate(Operation operation){
         double firstNumber = operation.getFirstNumber();
@@ -12,7 +17,7 @@ public class Calculator {
             case "*" -> firstNumber * secondNumber;
             case "/" -> {
                 if(secondNumber == 0) {
-                    System.out.println("Cannot divide by zero");
+                    LOG.warn("Cannot divide by zero");
                     yield Double.NaN;
                 }
                 else{
@@ -21,7 +26,7 @@ public class Calculator {
             }
             case "%" -> {
                 if(secondNumber == 0) {
-                    System.out.println("Cannot divide by zero");
+                    LOG.warn("Cannot divide by zero");
                     yield Double.NaN;
                 }
                 else{
@@ -29,7 +34,7 @@ public class Calculator {
                 }
             }
             default -> {
-                System.out.println("Invalid operator input");
+                LOG.warn("Invalid operator input");
                 yield Double.NaN;
             }
         };
