@@ -1,40 +1,15 @@
 package com.smartcalculator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Scanner;
 
 /**
  * Hello world!
  */
 public class App {
-    private static double calculate(double firstNumber, double secondNumber, String op){
-        return switch(op){
-            case "+" -> firstNumber + secondNumber;
-            case "-" -> firstNumber - secondNumber;
-            case "*" -> firstNumber * secondNumber;
-            case "/" -> {
-                if(secondNumber == 0) {
-                    System.out.println("Cannot divide by zero");
-                    yield Double.NaN;
-                }
-                else{
-                    yield firstNumber / secondNumber;
-                }
-            }
-            case "%" -> {
-                if(secondNumber == 0) {
-                    System.out.println("Cannot divide by zero");
-                    yield Double.NaN;
-                }
-                else{
-                    yield firstNumber % secondNumber;
-                }
-            }
-            default -> {
-                System.out.println("Invalid operator input");
-                yield Double.NaN;
-            }
-        };
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -51,13 +26,15 @@ public class App {
             String secondNumber = sc.nextLine().trim();
 
             System.out.print("Enter operator (+ - * / %): ");
-            String op = sc.nextLine().trim();
+            String operator = sc.nextLine().trim();
 
             try {
                 double firstNumberDouble = Double.parseDouble(firstNumber);
                 double secondNumberDouble = Double.parseDouble(secondNumber);
 
-                double result = calculate(firstNumberDouble, secondNumberDouble, op);
+                Operation operation = new Operation(firstNumberDouble, secondNumberDouble, operator);
+
+                double result = Calculator.calculate(operation);
 
                 if(!Double.isNaN(result)) {
                     System.out.printf("Result: %.2f%n", result);
