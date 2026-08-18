@@ -20,6 +20,8 @@ public class Main {
         LOG.info("Welcome to My Smart Calculator");
         LOG.info("Type 'exit' to quit.");
 
+        Operation operation = new Operation();
+
         while(true) {
             LOG.info("Enter first number (or 'exit'): ");
             String firstNumber = sc.nextLine().trim();
@@ -48,7 +50,10 @@ public class Main {
                 continue;
             }
 
-            Operation operation = new Operation(firstNumberDouble, secondNumberDouble, operator);
+            operation.setFirstNumber(firstNumberDouble);
+            operation.setSecondNumber(secondNumberDouble);
+            operation.setOperator(operator);
+
             double result = Calculator.calculate(operation);
             if(!Double.isNaN(result)) {
                 LOG.info(String.format("Result: %.2f%n", result));
