@@ -8,8 +8,8 @@ import java.util.Scanner;
 /**
  * Entry point for the Smart Calculator CLI application
  */
-public class App {
-    private static final Logger LOG = LoggerFactory.getLogger(App.class);
+public class Main {
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
     /**
      * Starts the Smart Calculator application
