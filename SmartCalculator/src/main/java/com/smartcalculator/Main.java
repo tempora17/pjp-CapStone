@@ -1,6 +1,8 @@
 package com.smartcalculator;
 
 import java.util.Scanner;
+
+import com.smartcalculator.calculator.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +19,6 @@ public class Main {
     Scanner sc = new Scanner(System.in);
     LOG.info("Welcome to My Smart Calculator");
     LOG.info("Type 'exit' to quit.");
-
-    Operation operation = new Operation();
 
     while (true) {
       LOG.info("Enter first number (or 'exit'): ");
@@ -49,14 +49,26 @@ public class Main {
       LOG.info("Enter operator (+ - * / %): ");
       String operator = sc.nextLine().trim();
 
-      operation.setFirstNumber(firstNumberDouble);
-      operation.setSecondNumber(secondNumberDouble);
-      operation.setOperator(operator);
+      Operation operation = switch (operator) {
+        case "+" -> new Addition(firstNumberDouble, secondNumberDouble);
+        case "-" -> new Subtraction(firstNumberDouble, secondNumberDouble);
+        case "*" -> new Multiplication(firstNumberDouble, secondNumberDouble);
+        case "/" -> new Division(firstNumberDouble, secondNumberDouble);
+        case "%" -> new Modulo(firstNumberDouble, secondNumberDouble);
+        default ->  {
+          LOG.warn("Invalid operator: " + operator);
+          yield null;
+        }
+      };
 
-      double result = Calculator.calculate(operation);
-      if (!Double.isNaN(result)) {
-        LOG.info(String.format("Result: %.2f%n", result));
+      if(operation != null){
+        LOG.info(operation.toString());
       }
+//      double result = Calculator.calculate(operation);
+//
+//      if (!Double.isNaN(result)) {
+//        LOG.info(operation.toString());
+//      }
     }
     LOG.info("GoodBye:)");
     sc.close();

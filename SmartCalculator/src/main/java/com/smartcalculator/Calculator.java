@@ -2,7 +2,7 @@ package com.smartcalculator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import com.smartcalculator.calculator.Operation;
 /** Perform mathematical calculation for Smart Calculator */
 public class Calculator {
 
@@ -15,34 +15,10 @@ public class Calculator {
    * @return the result of the calculation
    */
   public static double calculate(Operation operation) {
-    double firstNumber = operation.getFirstNumber();
-    double secondNumber = operation.getSecondNumber();
-    String operator = operation.getOperator();
-    return switch (operator) {
-      case "+" -> firstNumber + secondNumber;
-      case "-" -> firstNumber - secondNumber;
-      case "*" -> firstNumber * secondNumber;
-      case "/" -> {
-        if (secondNumber == 0) {
-          LOG.warn("Cannot divide by zero");
-          yield Double.NaN;
-        } else {
-          yield firstNumber / secondNumber;
-        }
-      }
-      case "%" -> {
-        if (secondNumber == 0) {
-          LOG.warn("Cannot modulo by zero");
-          yield Double.NaN;
-        } else {
-          yield firstNumber % secondNumber;
-        }
-      }
-      default -> {
-        LOG.warn("Invalid operator input");
-        yield Double.NaN;
-      }
-    };
+    if(operation == null){
+      return Double.NaN;
+    }
+    return operation.calculate();
   }
 
   /**

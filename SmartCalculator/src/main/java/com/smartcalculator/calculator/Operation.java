@@ -9,6 +9,8 @@ public abstract class Operation {
     this.secondNumber = secondNumber;
   }
 
+  public abstract double calculate();
+
   public double getFirstNumber() {
     return firstNumber;
   }
