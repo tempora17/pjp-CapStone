@@ -24,31 +24,32 @@ public class Main {
 
         while(true) {
             LOG.info("Enter first number (or 'exit'): ");
+            double firstNumberDouble,  secondNumberDouble;
+
             String firstNumber = sc.nextLine().trim();
             if(firstNumber.equalsIgnoreCase("exit")) {
                 break;
             }
-            LOG.info("Enter second number: ");
-            String secondNumber = sc.nextLine().trim();
-
-            LOG.info("Enter operator (+ - * / %): ");
-            String operator = sc.nextLine().trim();
-
-            double firstNumberDouble,  secondNumberDouble;
 
             try{
                 firstNumberDouble = Double.parseDouble(firstNumber);
             } catch (NumberFormatException e){
-                LOG.warn("Please enter a valid number");
+                LOG.warn("Please enter a valid First number");
                 continue;
             }
+
+            LOG.info("Enter second number: ");
+            String secondNumber = sc.nextLine().trim();
 
             try{
                 secondNumberDouble = Double.parseDouble(secondNumber);
             } catch (NumberFormatException e){
-                LOG.warn("Please enter a valid number");
+                LOG.warn("Please enter a valid Second number");
                 continue;
             }
+
+            LOG.info("Enter operator (+ - * / %): ");
+            String operator = sc.nextLine().trim();
 
             operation.setFirstNumber(firstNumberDouble);
             operation.setSecondNumber(secondNumberDouble);

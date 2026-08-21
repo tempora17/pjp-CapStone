@@ -35,7 +35,7 @@ public class Calculator {
             }
             case "%" -> {
                 if(secondNumber == 0) {
-                    LOG.warn("Cannot divide by zero");
+                    LOG.warn("Cannot modulo by zero");
                     yield Double.NaN;
                 }
                 else{
@@ -64,9 +64,13 @@ public class Calculator {
      * Calculate the square root of a number
      *
      * @param number the number whose square root is to be calculated
-     * @return the saquare root of the number
+     * @return the square root of the number. If number is negative then Double.NaN
      */
     public static double squareRoot(double number) {
+        if(number < 0) {
+            LOG.warn("Cannot take Square Root of a Negative number");
+            return Double.NaN;
+        }
         return Math.sqrt(number);
     }
 
