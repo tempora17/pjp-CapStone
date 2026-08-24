@@ -3,7 +3,7 @@ package com.smartcalculator.w5;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PersonalLoan extends Loan {
+public class PersonalLoan extends Loan implements Exportable{
   private static final Logger LOG = LoggerFactory.getLogger(PersonalLoan.class);
 
   public int getTenureMonths() {
@@ -27,5 +27,10 @@ public class PersonalLoan extends Loan {
   @Override
   public String loanType() {
     return "Personal Loan";
+  }
+
+  @Override
+  public String toCSVRow() {
+    return loanId + "," + applicantName + "," + principal + "," + annualRate + "," + tenureMonths + "," + calculateEMI();
   }
 }
