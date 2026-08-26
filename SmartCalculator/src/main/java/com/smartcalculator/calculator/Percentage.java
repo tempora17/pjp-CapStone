@@ -29,6 +29,11 @@ public class Percentage extends Operation implements Calculable {
    */
   @Override
   public String toString() {
-    return "Percentage: " + getFirstNumber() + " % " + getSecondNumber() +  " = " + String.format("%.2f", calculate());
+    return "Percentage: "
+        + getFirstNumber()
+        + " % "
+        + getSecondNumber()
+        + " = "
+        + String.format("%.2f", calculate());
   }
 }

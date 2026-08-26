@@ -1,8 +1,6 @@
 package com.smartcalculator.calculator;
 
-/**
- * Represents an object that can perform some type of calculation.
- */
+/** Represents an object that can perform some type of calculation. */
 public interface Calculable {
 
   /**

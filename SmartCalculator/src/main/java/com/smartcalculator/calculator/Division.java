@@ -1,10 +1,9 @@
 package com.smartcalculator.calculator;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Division extends Operation implements Calculable{
+public class Division extends Operation implements Calculable {
   public static final Logger LOG = LoggerFactory.getLogger(Division.class);
 
   /**
@@ -24,7 +23,7 @@ public class Division extends Operation implements Calculable{
    */
   @Override
   public double calculate() {
-    if(getSecondNumber() == 0){
+    if (getSecondNumber() == 0) {
       LOG.warn("Cannot divide by zero");
       return Double.NaN;
     }
@@ -37,10 +36,20 @@ public class Division extends Operation implements Calculable{
    * @return a string describing the division
    */
   @Override
-  public String toString(){
-    if(Double.isNaN(calculate())){
-      return "Division by zero: " + getFirstNumber() + " / " + getSecondNumber() +  " = " + "Undefined";
+  public String toString() {
+    if (Double.isNaN(calculate())) {
+      return "Division by zero: "
+          + getFirstNumber()
+          + " / "
+          + getSecondNumber()
+          + " = "
+          + "Undefined";
     }
-    return "Division: " + getFirstNumber() + " / " + getSecondNumber() +  " = " + String.format("%.2f", calculate());
+    return "Division: "
+        + getFirstNumber()
+        + " / "
+        + getSecondNumber()
+        + " = "
+        + String.format("%.2f", calculate());
   }
 }

@@ -1,10 +1,9 @@
 package com.smartcalculator;
 
 import com.smartcalculator.calculator.*;
+import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Scanner;
 
 /** Perform mathematical calculation for Smart Calculator */
 public class Calculator {
@@ -12,14 +11,12 @@ public class Calculator {
   public static final Logger LOG = LoggerFactory.getLogger(Calculator.class);
   public static final Scanner scanner = new Scanner(System.in);
 
-  private Calculator(){
-//    Prevent initialization
+  private Calculator() {
+    //    Prevent initialization
   }
 
-  /**
-  * Run the Smart Calculator Application
-  */
-  public static void run(){
+  /** Run the Smart Calculator Application */
+  public static void run() {
     LOG.info("Welcome to My Smart Calculator");
     LOG.info("Type 'exit' to quit.");
 
@@ -42,7 +39,7 @@ public class Calculator {
       LOG.info("Enter operator (+ - * / % sqrt pect): ");
       String operator = scanner.nextLine().trim();
 
-      if(operator.equals("sqrt")){
+      if (operator.equals("sqrt")) {
         Operation operation = new SquareRoot(firstNumberDouble);
         LOG.info(operation.toString());
         continue;
@@ -58,20 +55,21 @@ public class Calculator {
         continue;
       }
 
-      Operation operation = switch (operator) {
-        case "+" -> new Addition(firstNumberDouble, secondNumberDouble);
-        case "-" -> new Subtraction(firstNumberDouble, secondNumberDouble);
-        case "*" -> new Multiplication(firstNumberDouble, secondNumberDouble);
-        case "/" -> new Division(firstNumberDouble, secondNumberDouble);
-        case "%" -> new Modulo(firstNumberDouble, secondNumberDouble);
-        case "pect" -> new Percentage(firstNumberDouble, secondNumberDouble);
-        default ->  {
-          LOG.warn("Invalid operator: " + operator);
-          yield null;
-        }
-      };
+      Operation operation =
+          switch (operator) {
+            case "+" -> new Addition(firstNumberDouble, secondNumberDouble);
+            case "-" -> new Subtraction(firstNumberDouble, secondNumberDouble);
+            case "*" -> new Multiplication(firstNumberDouble, secondNumberDouble);
+            case "/" -> new Division(firstNumberDouble, secondNumberDouble);
+            case "%" -> new Modulo(firstNumberDouble, secondNumberDouble);
+            case "pect" -> new Percentage(firstNumberDouble, secondNumberDouble);
+            default -> {
+              LOG.warn("Invalid operator: " + operator);
+              yield null;
+            }
+          };
 
-      if(operation != null){
+      if (operation != null) {
         LOG.info(operation.toString());
       }
     }

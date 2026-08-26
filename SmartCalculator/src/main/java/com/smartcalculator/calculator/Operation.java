@@ -1,9 +1,6 @@
 package com.smartcalculator.calculator;
 
-
-/**
- * Represents a mathematical operation with two operands.
- */
+/** Represents a mathematical operation with two operands. */
 public abstract class Operation {
   private double firstNumber;
   private double secondNumber;

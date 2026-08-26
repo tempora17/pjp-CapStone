@@ -1,9 +1,6 @@
 package com.smartcalculator.calculator;
 
-
-/**
- * Represents an addition operation.
- */
+/** Represents an addition operation. */
 public class Addition extends Operation implements Calculable {
 
   /**
@@ -33,6 +30,11 @@ public class Addition extends Operation implements Calculable {
    */
   @Override
   public String toString() {
-    return "Addition: " + getFirstNumber() + " + " + getSecondNumber() + " = " + String.format("%.2f", calculate());
+    return "Addition: "
+        + getFirstNumber()
+        + " + "
+        + getSecondNumber()
+        + " = "
+        + String.format("%.2f", calculate());
   }
 }

@@ -1,6 +1,5 @@
 package com.smartcalculator;
 
-import java.util.Scanner;
 
 import com.smartcalculator.calculator.*;
 import org.slf4j.Logger;

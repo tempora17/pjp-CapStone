@@ -13,6 +13,11 @@ public class Subtraction extends Operation implements Calculable {
 
   @Override
   public String toString() {
-    return "Subtraction: " + getFirstNumber() + " - " + getSecondNumber() + " = " + String.format("%.2f", calculate());
+    return "Subtraction: "
+        + getFirstNumber()
+        + " - "
+        + getSecondNumber()
+        + " = "
+        + String.format("%.2f", calculate());
   }
 }

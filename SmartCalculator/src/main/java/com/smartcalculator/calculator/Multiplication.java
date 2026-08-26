@@ -1,6 +1,5 @@
 package com.smartcalculator.calculator;
 
-
 public class Multiplication extends Operation implements Calculable {
 
   /**
@@ -30,6 +29,11 @@ public class Multiplication extends Operation implements Calculable {
    */
   @Override
   public String toString() {
-    return "Multiplication: " + getFirstNumber() + " * " + getSecondNumber() +  " = " + String.format("%.2f", calculate());
+    return "Multiplication: "
+        + getFirstNumber()
+        + " * "
+        + getSecondNumber()
+        + " = "
+        + String.format("%.2f", calculate());
   }
 }
