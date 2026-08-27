@@ -1,5 +1,7 @@
 package com.smartcalculator;
 
+import com.smartcalculator.calculator.*;
+import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,66 +9,71 @@ import org.slf4j.LoggerFactory;
 public class Calculator {
 
   public static final Logger LOG = LoggerFactory.getLogger(Calculator.class);
+  public static final Scanner scanner = new Scanner(System.in);
 
-  /**
-   * Calculate the results of the given operation
-   *
-   * @param operation the operation given for the calculation
-   * @return the result of the calculation
-   */
-  public static double calculate(Operation operation) {
-    double firstNumber = operation.getFirstNumber();
-    double secondNumber = operation.getSecondNumber();
-    String operator = operation.getOperator();
-    return switch (operator) {
-      case "+" -> firstNumber + secondNumber;
-      case "-" -> firstNumber - secondNumber;
-      case "*" -> firstNumber * secondNumber;
-      case "/" -> {
-        if (secondNumber == 0) {
-          LOG.warn("Cannot divide by zero");
-          yield Double.NaN;
-        } else {
-          yield firstNumber / secondNumber;
-        }
-      }
-      case "%" -> {
-        if (secondNumber == 0) {
-          LOG.warn("Cannot modulo by zero");
-          yield Double.NaN;
-        } else {
-          yield firstNumber % secondNumber;
-        }
-      }
-      default -> {
-        LOG.warn("Invalid operator input");
-        yield Double.NaN;
-      }
-    };
+  private Calculator() {
+    //    Prevent initialization
   }
 
-  /**
-   * Calculate the percentage of a value
-   *
-   * @param value the original value
-   * @param percent the percentage to calculate
-   * @return the calculate percentage
-   */
-  public static double percentage(double value, double percent) {
-    return value * percent / 100;
-  }
+  /** Run the Smart Calculator Application */
+  public static void run() {
+    LOG.info("Welcome to My Smart Calculator");
+    LOG.info("Type 'exit' to quit.");
 
-  /**
-   * Calculate the square root of a number
-   *
-   * @param number the number whose square root is to be calculated
-   * @return the square root of the number. If number is negative then Double.NaN
-   */
-  public static double squareRoot(double number) {
-    if (number < 0) {
-      LOG.warn("Cannot take Square Root of a Negative number");
-      return Double.NaN;
+    while (true) {
+      LOG.info("Enter first number (or 'exit'): ");
+      double firstNumberDouble, secondNumberDouble;
+
+      String firstNumber = scanner.nextLine().trim();
+      if (firstNumber.equalsIgnoreCase("exit")) {
+        break;
+      }
+
+      try {
+        firstNumberDouble = Double.parseDouble(firstNumber);
+      } catch (NumberFormatException e) {
+        LOG.warn("Please enter a valid First number");
+        continue;
+      }
+
+      LOG.info("Enter operator (+ - * / % sqrt pect): ");
+      String operator = scanner.nextLine().trim();
+
+      if (operator.equals("sqrt")) {
+        Operation operation = new SquareRoot(firstNumberDouble);
+        LOG.info(operation.toString());
+        continue;
+      }
+
+      LOG.info("Enter second number: ");
+      String secondNumber = scanner.nextLine().trim();
+
+      try {
+        secondNumberDouble = Double.parseDouble(secondNumber);
+      } catch (NumberFormatException e) {
+        LOG.warn("Please enter a valid Second number");
+        continue;
+      }
+
+      Operation operation =
+          switch (operator) {
+            case "+" -> new Addition(firstNumberDouble, secondNumberDouble);
+            case "-" -> new Subtraction(firstNumberDouble, secondNumberDouble);
+            case "*" -> new Multiplication(firstNumberDouble, secondNumberDouble);
+            case "/" -> new Division(firstNumberDouble, secondNumberDouble);
+            case "%" -> new Modulo(firstNumberDouble, secondNumberDouble);
+            case "pect" -> new Percentage(firstNumberDouble, secondNumberDouble);
+            default -> {
+              LOG.warn("Invalid operator: " + operator);
+              yield null;
+            }
+          };
+
+      if (operation != null) {
+        LOG.info(operation.toString());
+      }
     }
-    return Math.sqrt(number);
+    LOG.info("GoodBye:)");
+    scanner.close();
   }
 }
