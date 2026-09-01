@@ -2,6 +2,8 @@ package com.smartcalculator;
 
 import com.smartcalculator.calculator.*;
 import java.util.Scanner;
+
+import com.smartcalculator.exceptions.InvalidOperationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +24,7 @@ public class Calculator {
 
     while (true) {
       LOG.info("Enter first number (or 'exit'): ");
-      double firstNumberDouble, secondNumberDouble;
+      double number1, number2;
 
       String firstNumber = scanner.nextLine().trim();
       if (firstNumber.equalsIgnoreCase("exit")) {
@@ -30,7 +32,7 @@ public class Calculator {
       }
 
       try {
-        firstNumberDouble = Double.parseDouble(firstNumber);
+        number1 = Double.parseDouble(firstNumber);
       } catch (NumberFormatException e) {
         LOG.warn("Please enter a valid First number");
         continue;
@@ -40,7 +42,7 @@ public class Calculator {
       String operator = scanner.nextLine().trim();
 
       if (operator.equals("sqrt")) {
-        Operation operation = new SquareRoot(firstNumberDouble);
+        Operation operation = new SquareRoot(number1);
         LOG.info(operation.toString());
         continue;
       }
@@ -49,29 +51,31 @@ public class Calculator {
       String secondNumber = scanner.nextLine().trim();
 
       try {
-        secondNumberDouble = Double.parseDouble(secondNumber);
+        number2 = Double.parseDouble(secondNumber);
       } catch (NumberFormatException e) {
         LOG.warn("Please enter a valid Second number");
         continue;
       }
 
-      Operation operation =
-          switch (operator) {
-            case "+" -> new Addition(firstNumberDouble, secondNumberDouble);
-            case "-" -> new Subtraction(firstNumberDouble, secondNumberDouble);
-            case "*" -> new Multiplication(firstNumberDouble, secondNumberDouble);
-            case "/" -> new Division(firstNumberDouble, secondNumberDouble);
-            case "%" -> new Modulo(firstNumberDouble, secondNumberDouble);
-            case "pect" -> new Percentage(firstNumberDouble, secondNumberDouble);
-            default -> {
-              LOG.warn("Invalid operator: " + operator);
-              yield null;
-            }
-          };
-
-      if (operation != null) {
+      try {
+        Operation operation =
+            switch (operator) {
+              case "+" -> new Addition(number1, number2);
+              case "-" -> new Subtraction(number1, number2);
+              case "*" -> new Multiplication(number1, number2);
+              case "/" -> new Division(number1, number2);
+              case "%" -> new Modulo(number1, number2);
+              case "pect" -> new Percentage(number1, number2);
+              default -> {
+                throw new InvalidOperationException("Invalid Operation: " + operator);
+              }
+            };
         LOG.info(operation.toString());
+      } catch (InvalidOperationException e) {
+        LOG.info(e.getMessage());
+        LOG.warn("Please enter a valid Operation");
       }
+
     }
     LOG.info("GoodBye:)");
     scanner.close();
