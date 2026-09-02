@@ -1,9 +1,8 @@
 package com.smartcalculator;
 
 import com.smartcalculator.calculator.*;
-import java.util.Scanner;
-
 import com.smartcalculator.exceptions.InvalidOperationException;
+import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,7 +74,6 @@ public class Calculator {
         LOG.info(e.getMessage());
         LOG.warn("Please enter a valid Operation");
       }
-
     }
     LOG.info("GoodBye:)");
     scanner.close();

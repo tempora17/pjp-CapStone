@@ -45,7 +45,7 @@ public class Modulo extends Operation implements Calculable {
           + getSecondNumber()
           + " = "
           + String.format("%.2f", calculate());
-    } catch(ModuloByZeroException e){
+    } catch (ModuloByZeroException e) {
       return "Modulo by zero: "
           + getFirstNumber()
           + " / "

@@ -34,9 +34,9 @@ public class SquareRoot extends Operation implements Calculable {
    */
   @Override
   public String toString() {
-    try{
+    try {
       return "SquareRoot: " + getFirstNumber() + " = " + String.format("%.2f", calculate());
-    } catch(SquareRootOfNegativeException e){
+    } catch (SquareRootOfNegativeException e) {
       return "Square Root of Negative number: " + getFirstNumber() + " = " + "Undefined";
     }
   }

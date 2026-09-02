@@ -1,11 +1,10 @@
 package com.smartcalculator.calculator;
 
 import com.smartcalculator.exceptions.DivisionByZeroException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Division extends Operation implements Calculable {
   public static final Logger LOG = LoggerFactory.getLogger(Division.class);
@@ -45,7 +44,7 @@ public class Division extends Operation implements Calculable {
    */
   @Override
   public String toString() {
-    try{
+    try {
       return "Division: "
           + getFirstNumber()
           + " / "

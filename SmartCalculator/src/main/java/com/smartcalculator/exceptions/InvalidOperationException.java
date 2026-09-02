@@ -1,8 +1,6 @@
 package com.smartcalculator.exceptions;
 
-/**
- * Exception thrown when an unsupported mathematical operation is requested.
- */
+/** Exception thrown when an unsupported mathematical operation is requested. */
 public class InvalidOperationException extends RuntimeException {
 
   /**
@@ -13,5 +11,4 @@ public class InvalidOperationException extends RuntimeException {
   public InvalidOperationException(String message) {
     super(message);
   }
-
 }
