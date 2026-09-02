@@ -71,8 +71,8 @@ public class Calculator {
             };
         LOG.info(operation.toString());
       } catch (InvalidOperationException e) {
-        LOG.info(e.getMessage());
-        LOG.warn("Please enter a valid Operation");
+        LOG.warn(e.getMessage());
+        LOG.info("Please enter a valid Operation");
       }
     }
     LOG.info("GoodBye:)");
