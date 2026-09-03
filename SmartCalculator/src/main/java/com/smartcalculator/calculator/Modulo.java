@@ -1,5 +1,6 @@
 package com.smartcalculator.calculator;
 
+import com.smartcalculator.exceptions.ModuloByZeroException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +20,13 @@ public class Modulo extends Operation implements Calculable {
   /**
    * Calculates the Modulo between two numbers.
    *
-   * @return the Modulo between two numbers. Double.NaN if Modulo by zero.
+   * @return the Modulo between two numbers.
+   * @throws ModuloByZeroException when modulo by zero.
    */
   @Override
   public double calculate() {
     if (getSecondNumber() == 0) {
-      LOG.warn("Cannot Modulo by zero");
-      return Double.NaN;
+      throw new ModuloByZeroException();
     }
     return getFirstNumber() % getSecondNumber();
   }
@@ -37,7 +38,14 @@ public class Modulo extends Operation implements Calculable {
    */
   @Override
   public String toString() {
-    if (Double.isNaN(calculate())) {
+    try {
+      return "Modulo: "
+          + getFirstNumber()
+          + " % "
+          + getSecondNumber()
+          + " = "
+          + String.format("%.2f", calculate());
+    } catch (ModuloByZeroException e) {
       return "Modulo by zero: "
           + getFirstNumber()
           + " / "
@@ -45,11 +53,5 @@ public class Modulo extends Operation implements Calculable {
           + " = "
           + "Undefined";
     }
-    return "Modulo: "
-        + getFirstNumber()
-        + " % "
-        + getSecondNumber()
-        + " = "
-        + String.format("%.2f", calculate());
   }
 }

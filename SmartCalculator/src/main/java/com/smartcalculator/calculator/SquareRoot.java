@@ -1,5 +1,7 @@
 package com.smartcalculator.calculator;
 
+import com.smartcalculator.exceptions.SquareRootOfNegativeException;
+
 public class SquareRoot extends Operation implements Calculable {
 
   /**
@@ -14,12 +16,13 @@ public class SquareRoot extends Operation implements Calculable {
   /**
    * Calculates the square root of the given number.
    *
-   * @return the square root of the given number. Double.Nan if number is negative.
+   * @return the square root of the given number.
+   * @throws SquareRootOfNegativeException when the given number is negative.
    */
   @Override
   public double calculate() {
     if (getFirstNumber() < 0) {
-      return Double.NaN;
+      throw new SquareRootOfNegativeException();
     }
     return Math.sqrt(getFirstNumber());
   }
@@ -31,9 +34,10 @@ public class SquareRoot extends Operation implements Calculable {
    */
   @Override
   public String toString() {
-    if (Double.isNaN(calculate())) {
+    try {
+      return "SquareRoot: " + getFirstNumber() + " = " + String.format("%.2f", calculate());
+    } catch (SquareRootOfNegativeException e) {
       return "Square Root of Negative number: " + getFirstNumber() + " = " + "Undefined";
     }
-    return "SquareRoot: " + getFirstNumber() + " = " + String.format("%.2f", calculate());
   }
 }
