@@ -22,41 +22,45 @@ public class Calculator {
     LOG.info("Type 'exit' to quit.");
 
     while (true) {
-      LOG.info("Enter first number (or 'exit'): ");
-      double number1, number2;
-
-      String firstNumber = scanner.nextLine().trim();
-      if (firstNumber.equalsIgnoreCase("exit")) {
-        break;
-      }
-
       try {
-        number1 = Double.parseDouble(firstNumber);
-      } catch (NumberFormatException e) {
-        LOG.warn("Please enter a valid First number");
-        continue;
-      }
+        LOG.info("Enter first number (or 'exit'): ");
+        double number1, number2;
 
-      LOG.info("Enter operator (+ - * / % sqrt pect): ");
-      String operator = scanner.nextLine().trim();
+        String firstNumber = scanner.nextLine().trim();
+        if (firstNumber.equalsIgnoreCase("exit")) {
+          break;
+        }
 
-      if (operator.equals("sqrt")) {
-        Operation operation = new SquareRoot(number1);
-        LOG.info(operation.toString());
-        continue;
-      }
+        try {
+          number1 = Double.parseDouble(firstNumber);
+        } catch (NumberFormatException e) {
+          LOG.warn("Please enter a valid First number");
+          continue;
+        }
 
-      LOG.info("Enter second number: ");
-      String secondNumber = scanner.nextLine().trim();
+        LOG.info("Enter operator (+ - * / % sqrt pect): ");
+        String operator = scanner.nextLine().trim();
 
-      try {
-        number2 = Double.parseDouble(secondNumber);
-      } catch (NumberFormatException e) {
-        LOG.warn("Please enter a valid Second number");
-        continue;
-      }
+        if (!validOperationInput(operator)) {
+          throw new InvalidOperationException("Invalid operation: " + operator);
+        }
 
-      try {
+        if (operator.equals("sqrt")) {
+          Operation operation = new SquareRoot(number1);
+          LOG.info(operation.toString());
+          continue;
+        }
+
+        LOG.info("Enter second number: ");
+        String secondNumber = scanner.nextLine().trim();
+
+        try {
+          number2 = Double.parseDouble(secondNumber);
+        } catch (NumberFormatException e) {
+          LOG.warn("Please enter a valid Second number");
+          continue;
+        }
+
         Operation operation =
             switch (operator) {
               case "+" -> new Addition(number1, number2);
@@ -77,5 +81,15 @@ public class Calculator {
     }
     LOG.info("GoodBye:)");
     scanner.close();
+  }
+
+  private static boolean validOperationInput(String operation) {
+    return operation.equals("pect")
+        || operation.equals("sqrt")
+        || operation.equals("+")
+        || operation.equals("-")
+        || operation.equals("*")
+        || operation.equals("/")
+        || operation.equals("%");
   }
 }
