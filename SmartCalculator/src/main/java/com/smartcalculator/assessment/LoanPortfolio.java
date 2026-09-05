@@ -37,7 +37,6 @@ public class LoanPortfolio {
       System.out.println("Loan HL999 not found.");
     }
 
-
     System.out.println("\nUNIQUE APPLICANTS");
     Set<String> applicants = new HashSet<>();
 
@@ -45,7 +44,6 @@ public class LoanPortfolio {
       applicants.add(loan.getApplicantName());
     }
 
-    System.out.println("Unique applicant count: " + applicants.size()
-    );
+    System.out.println("Unique applicant count: " + applicants.size());
   }
 }

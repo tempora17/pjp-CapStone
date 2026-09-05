@@ -1,6 +1,5 @@
 package com.smartcalculator.assessment;
 
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -23,7 +22,8 @@ public class PrecisionDemo {
     int compoundsPerYear = 12;
     int totalPeriods = years * compoundsPerYear;
 
-    BigDecimal periodicRate = annualRate.divide(BigDecimal.valueOf(compoundsPerYear), 20, RoundingMode.HALF_UP);
+    BigDecimal periodicRate =
+        annualRate.divide(BigDecimal.valueOf(compoundsPerYear), 20, RoundingMode.HALF_UP);
     BigDecimal factor = BigDecimal.ONE.add(periodicRate).pow(totalPeriods);
     BigDecimal amount = principal.multiply(factor).setScale(2, RoundingMode.HALF_UP);
 

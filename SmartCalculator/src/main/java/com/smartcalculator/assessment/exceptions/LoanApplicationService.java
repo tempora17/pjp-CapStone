@@ -1,6 +1,5 @@
 package com.smartcalculator.assessment.exceptions;
 
-
 public class LoanApplicationService {
 
   private static final double MIN_INCOME_RATIO = 0.10;
@@ -12,12 +11,16 @@ public class LoanApplicationService {
       throw new InvalidLoanAmountException("Invalid loan amount: " + loanAmount);
     }
     if (creditScore < MIN_CREDIT_SCORE) {
-      throw new CreditScoreBelowThresholdException("Credit score is below the required threshold of " + MIN_CREDIT_SCORE);
+      throw new CreditScoreBelowThresholdException(
+          "Credit score is below the required threshold of " + MIN_CREDIT_SCORE);
     }
     if (income < loanAmount * MIN_INCOME_RATIO) {
       double requiredIncome = loanAmount * MIN_INCOME_RATIO;
       double shortfall = requiredIncome - income;
-      throw new InsufficientIncomeException(String.format("Insufficient income. Required: %.2f, Provided: %.2f", requiredIncome, income), shortfall);
+      throw new InsufficientIncomeException(
+          String.format(
+              "Insufficient income. Required: %.2f, Provided: %.2f", requiredIncome, income),
+          shortfall);
     }
 
     return "APPROVED";
@@ -44,7 +47,6 @@ public class LoanApplicationService {
     } finally {
       System.out.println("Application processing completed.");
     }
-
 
     System.out.println("SCENARIO 3: INVALID AMOUNT");
     try {
