@@ -45,7 +45,6 @@ public class ATMSimulator {
         atm.withdraw(amount);
         System.out.println("Withdrawal successful.");
         System.out.printf("New balance: Rs.%.2f%n", atm.getBalance());
-        break;
       } catch (ATMRuleViolationException e) {
         attempts++;
         System.out.println(e.getMessage());
