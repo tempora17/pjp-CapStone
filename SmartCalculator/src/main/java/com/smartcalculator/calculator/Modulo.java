@@ -1,8 +1,11 @@
 package com.smartcalculator.calculator;
 
 import com.smartcalculator.exceptions.ModuloByZeroException;
+import com.smartcalculator.exceptions.ModuloOfNonIntegerNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.math.BigDecimal;
 
 public class Modulo extends Operation implements Calculable {
   public static final Logger LOG = LoggerFactory.getLogger(Modulo.class);
@@ -13,7 +16,7 @@ public class Modulo extends Operation implements Calculable {
    * @param firstNumber the first number
    * @param secondNumber the second number
    */
-  public Modulo(double firstNumber, double secondNumber) {
+  public Modulo(BigDecimal firstNumber, BigDecimal secondNumber) {
     super(firstNumber, secondNumber);
   }
 
@@ -25,10 +28,13 @@ public class Modulo extends Operation implements Calculable {
    */
   @Override
   public double calculate() {
-    if (getSecondNumber() == 0) {
+    if (getSecondNumber().compareTo(BigDecimal.ZERO) == 0) {
       throw new ModuloByZeroException();
     }
-    return getFirstNumber() % getSecondNumber();
+    if(getFirstNumber().stripTrailingZeros().scale() > 0 || getSecondNumber().stripTrailingZeros().scale() > 0){
+      throw new ModuloOfNonIntegerNumber();
+    }
+    return getFirstNumber().remainder(getSecondNumber()).doubleValue();
   }
 
   /**
@@ -48,7 +54,14 @@ public class Modulo extends Operation implements Calculable {
     } catch (ModuloByZeroException e) {
       return "Modulo by zero: "
           + getFirstNumber()
-          + " / "
+          + " % "
+          + getSecondNumber()
+          + " = "
+          + "Undefined";
+    } catch (ModuloOfNonIntegerNumber e) {
+      return "Modulo of  non integer number: "
+          + getFirstNumber()
+          + " % "
           + getSecondNumber()
           + " = "
           + "Undefined";

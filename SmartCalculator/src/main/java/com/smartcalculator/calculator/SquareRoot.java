@@ -2,6 +2,9 @@ package com.smartcalculator.calculator;
 
 import com.smartcalculator.exceptions.SquareRootOfNegativeException;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 public class SquareRoot extends Operation implements Calculable {
 
   /**
@@ -9,7 +12,7 @@ public class SquareRoot extends Operation implements Calculable {
    *
    * @param number the input number
    */
-  public SquareRoot(double number) {
+  public SquareRoot(BigDecimal number) {
     super(number);
   }
 
@@ -21,10 +24,10 @@ public class SquareRoot extends Operation implements Calculable {
    */
   @Override
   public double calculate() {
-    if (getFirstNumber() < 0) {
+    if (getFirstNumber().compareTo(BigDecimal.ZERO) < 0) {
       throw new SquareRootOfNegativeException();
     }
-    return Math.sqrt(getFirstNumber());
+    return getFirstNumber().sqrt(MathContext.DECIMAL128).doubleValue();
   }
 
   /**
