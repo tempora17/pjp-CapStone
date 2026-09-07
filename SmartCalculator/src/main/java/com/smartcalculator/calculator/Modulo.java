@@ -1,7 +1,6 @@
 package com.smartcalculator.calculator;
 
 import com.smartcalculator.exceptions.ModuloByZeroException;
-import com.smartcalculator.exceptions.ModuloOfNonIntegerNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,9 +30,6 @@ public class Modulo extends Operation implements Calculable {
     if (getSecondNumber().compareTo(BigDecimal.ZERO) == 0) {
       throw new ModuloByZeroException();
     }
-    if(getFirstNumber().stripTrailingZeros().scale() > 0 || getSecondNumber().stripTrailingZeros().scale() > 0){
-      throw new ModuloOfNonIntegerNumber();
-    }
     return getFirstNumber().remainder(getSecondNumber()).doubleValue();
   }
 
@@ -53,13 +49,6 @@ public class Modulo extends Operation implements Calculable {
           + String.format("%.2f", calculate());
     } catch (ModuloByZeroException e) {
       return "Modulo by zero: "
-          + getFirstNumber()
-          + " % "
-          + getSecondNumber()
-          + " = "
-          + "Undefined";
-    } catch (ModuloOfNonIntegerNumber e) {
-      return "Modulo of  non integer number: "
           + getFirstNumber()
           + " % "
           + getSecondNumber()
