@@ -1,5 +1,6 @@
 # Pseudo Code 
 
+```
 PROCEDURE ATM_Withdraw()
     
     SET attempts = 0
@@ -32,3 +33,4 @@ PROCEDURE ATM_Withdraw()
     RETURN FAILURE
     
 END PROCEDURE
+```
