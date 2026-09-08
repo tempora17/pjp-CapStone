@@ -1,7 +1,6 @@
 package com.smartcalculator.calculator;
 
 import com.smartcalculator.exceptions.SquareRootOfNegativeException;
-
 import java.math.BigDecimal;
 import java.math.MathContext;
 

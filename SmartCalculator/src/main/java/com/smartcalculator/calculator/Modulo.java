@@ -1,10 +1,9 @@
 package com.smartcalculator.calculator;
 
 import com.smartcalculator.exceptions.ModuloByZeroException;
+import java.math.BigDecimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.math.BigDecimal;
 
 public class Modulo extends Operation implements Calculable {
   public static final Logger LOG = LoggerFactory.getLogger(Modulo.class);

@@ -22,7 +22,10 @@ public class Percentage extends Operation implements Calculable {
    */
   @Override
   public double calculate() {
-    return getFirstNumber().multiply(getSecondNumber()).divide(BigDecimal.valueOf(100.0), 10,RoundingMode.HALF_UP).doubleValue();
+    return getFirstNumber()
+        .multiply(getSecondNumber())
+        .divide(BigDecimal.valueOf(100.0), 10, RoundingMode.HALF_UP)
+        .doubleValue();
   }
 
   /**

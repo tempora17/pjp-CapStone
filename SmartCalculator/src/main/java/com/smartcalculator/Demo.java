@@ -1,7 +1,6 @@
 package com.smartcalculator;
 
 import com.smartcalculator.calculator.*;
-
 import java.math.BigDecimal;
 import java.util.List;
 import org.slf4j.Logger;

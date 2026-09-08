@@ -25,7 +25,6 @@ public class Addition extends Operation implements Calculable {
     return getSecondNumber().add(getFirstNumber()).doubleValue();
   }
 
-
   /**
    * Returns a readable representation of the addition.
    *

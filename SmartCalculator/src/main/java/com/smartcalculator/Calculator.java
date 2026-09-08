@@ -2,7 +2,6 @@ package com.smartcalculator;
 
 import com.smartcalculator.calculator.*;
 import com.smartcalculator.exceptions.InvalidOperationException;
-
 import java.math.BigDecimal;
 import java.util.Scanner;
 import org.slf4j.Logger;
