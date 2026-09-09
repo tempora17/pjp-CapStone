@@ -15,7 +15,7 @@ public class Division extends Operation implements Calculable {
    * @param firstNumber the first number
    * @param secondNumber the second number
    */
-  public Division(double firstNumber, double secondNumber) {
+  public Division(BigDecimal firstNumber, BigDecimal secondNumber) {
     super(firstNumber, secondNumber);
   }
 
@@ -27,14 +27,10 @@ public class Division extends Operation implements Calculable {
    */
   @Override
   public double calculate() {
-    if (getSecondNumber() == 0) {
+    if (getSecondNumber().compareTo(BigDecimal.ZERO) == 0) {
       throw new DivisionByZeroException();
     }
-
-    BigDecimal firstNumber = new BigDecimal(getFirstNumber());
-    BigDecimal secondNumber = new BigDecimal(getSecondNumber());
-
-    return firstNumber.divide(secondNumber, 10, RoundingMode.HALF_UP).doubleValue();
+    return getFirstNumber().divide(getSecondNumber(), 10, RoundingMode.HALF_UP).doubleValue();
   }
 
   /**

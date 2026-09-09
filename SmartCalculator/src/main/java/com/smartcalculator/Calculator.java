@@ -2,6 +2,7 @@ package com.smartcalculator;
 
 import com.smartcalculator.calculator.*;
 import com.smartcalculator.exceptions.InvalidOperationException;
+import java.math.BigDecimal;
 import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class Calculator {
     while (true) {
       try {
         LOG.info("Enter first number (or 'exit'): ");
-        double number1, number2;
+        BigDecimal number1, number2;
 
         String firstNumber = scanner.nextLine().trim();
         if (firstNumber.equalsIgnoreCase("exit")) {
@@ -32,7 +33,7 @@ public class Calculator {
         }
 
         try {
-          number1 = Double.parseDouble(firstNumber);
+          number1 = new BigDecimal(firstNumber);
         } catch (NumberFormatException e) {
           LOG.warn("Please enter a valid First number");
           continue;
@@ -55,7 +56,7 @@ public class Calculator {
         String secondNumber = scanner.nextLine().trim();
 
         try {
-          number2 = Double.parseDouble(secondNumber);
+          number2 = new BigDecimal(secondNumber);
         } catch (NumberFormatException e) {
           LOG.warn("Please enter a valid Second number");
           continue;

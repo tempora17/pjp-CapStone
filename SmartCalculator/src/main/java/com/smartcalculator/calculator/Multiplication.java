@@ -1,5 +1,7 @@
 package com.smartcalculator.calculator;
 
+import java.math.BigDecimal;
+
 public class Multiplication extends Operation implements Calculable {
 
   /**
@@ -8,7 +10,7 @@ public class Multiplication extends Operation implements Calculable {
    * @param firstNumber the first number
    * @param secondNumber the second number
    */
-  public Multiplication(double firstNumber, double secondNumber) {
+  public Multiplication(BigDecimal firstNumber, BigDecimal secondNumber) {
     super(firstNumber, secondNumber);
   }
 
@@ -19,7 +21,7 @@ public class Multiplication extends Operation implements Calculable {
    */
   @Override
   public double calculate() {
-    return getFirstNumber() * getSecondNumber();
+    return getFirstNumber().multiply(getSecondNumber()).doubleValue();
   }
 
   /**

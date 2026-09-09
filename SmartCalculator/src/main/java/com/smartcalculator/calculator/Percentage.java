@@ -1,5 +1,8 @@
 package com.smartcalculator.calculator;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Percentage extends Operation implements Calculable {
 
   /**
@@ -8,7 +11,7 @@ public class Percentage extends Operation implements Calculable {
    * @param firstNumber the first number
    * @param secondNumber the second number
    */
-  public Percentage(double firstNumber, double secondNumber) {
+  public Percentage(BigDecimal firstNumber, BigDecimal secondNumber) {
     super(firstNumber, secondNumber);
   }
 
@@ -19,7 +22,10 @@ public class Percentage extends Operation implements Calculable {
    */
   @Override
   public double calculate() {
-    return getFirstNumber() * getSecondNumber() / 100.0;
+    return getFirstNumber()
+        .multiply(getSecondNumber())
+        .divide(BigDecimal.valueOf(100.0), 10, RoundingMode.HALF_UP)
+        .doubleValue();
   }
 
   /**
@@ -31,7 +37,7 @@ public class Percentage extends Operation implements Calculable {
   public String toString() {
     return "Percentage: "
         + getFirstNumber()
-        + " % "
+        + " % of "
         + getSecondNumber()
         + " = "
         + String.format("%.2f", calculate());

@@ -1,9 +1,11 @@
 package com.smartcalculator.calculator;
 
+import java.math.BigDecimal;
+
 /** Represents a mathematical operation with two operands. */
 public abstract class Operation {
-  private double firstNumber;
-  private double secondNumber;
+  private BigDecimal firstNumber;
+  private BigDecimal secondNumber;
 
   /**
    * Creates an operation with two operands.
@@ -11,7 +13,7 @@ public abstract class Operation {
    * @param firstNumber the first number
    * @param secondNumber the second number
    */
-  public Operation(double firstNumber, double secondNumber) {
+  public Operation(BigDecimal firstNumber, BigDecimal secondNumber) {
     this.firstNumber = firstNumber;
     this.secondNumber = secondNumber;
   }
@@ -21,8 +23,8 @@ public abstract class Operation {
    *
    * @param firstNumber the first number
    */
-  public Operation(double firstNumber) {
-    this(firstNumber, Double.NaN);
+  public Operation(BigDecimal firstNumber) {
+    this.firstNumber = firstNumber;
   }
 
   /**
@@ -37,7 +39,7 @@ public abstract class Operation {
    *
    * @return the first number
    */
-  public double getFirstNumber() {
+  public BigDecimal getFirstNumber() {
     return firstNumber;
   }
 
@@ -46,7 +48,7 @@ public abstract class Operation {
    *
    * @return the second number
    */
-  public double getSecondNumber() {
+  public BigDecimal getSecondNumber() {
     return secondNumber;
   }
 }

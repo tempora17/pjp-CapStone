@@ -1,6 +1,7 @@
 package com.smartcalculator.calculator;
 
 import com.smartcalculator.exceptions.ModuloByZeroException;
+import java.math.BigDecimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +14,7 @@ public class Modulo extends Operation implements Calculable {
    * @param firstNumber the first number
    * @param secondNumber the second number
    */
-  public Modulo(double firstNumber, double secondNumber) {
+  public Modulo(BigDecimal firstNumber, BigDecimal secondNumber) {
     super(firstNumber, secondNumber);
   }
 
@@ -25,10 +26,10 @@ public class Modulo extends Operation implements Calculable {
    */
   @Override
   public double calculate() {
-    if (getSecondNumber() == 0) {
+    if (getSecondNumber().compareTo(BigDecimal.ZERO) == 0) {
       throw new ModuloByZeroException();
     }
-    return getFirstNumber() % getSecondNumber();
+    return getFirstNumber().remainder(getSecondNumber()).doubleValue();
   }
 
   /**
@@ -48,7 +49,7 @@ public class Modulo extends Operation implements Calculable {
     } catch (ModuloByZeroException e) {
       return "Modulo by zero: "
           + getFirstNumber()
-          + " / "
+          + " % "
           + getSecondNumber()
           + " = "
           + "Undefined";

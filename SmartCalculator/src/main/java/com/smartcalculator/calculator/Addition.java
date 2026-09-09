@@ -1,5 +1,7 @@
 package com.smartcalculator.calculator;
 
+import java.math.BigDecimal;
+
 /** Represents an addition operation. */
 public class Addition extends Operation implements Calculable {
 
@@ -9,7 +11,7 @@ public class Addition extends Operation implements Calculable {
    * @param firstNumber the first number
    * @param secondNumber the second number
    */
-  public Addition(double firstNumber, double secondNumber) {
+  public Addition(BigDecimal firstNumber, BigDecimal secondNumber) {
     super(firstNumber, secondNumber);
   }
 
@@ -20,7 +22,7 @@ public class Addition extends Operation implements Calculable {
    */
   @Override
   public double calculate() {
-    return getFirstNumber() + getSecondNumber();
+    return getSecondNumber().add(getFirstNumber()).doubleValue();
   }
 
   /**
