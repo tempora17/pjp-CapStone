@@ -1,0 +1,109 @@
+
+nav {
+    display: flex;
+    flex-direction: row;
+    background-color: #1F3864;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+nav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 16px;
+}
+
+nav a:hover {
+    background: #0F7C7C;
+}
+
+/* Styling main body now */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #1F3864;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #EAF1FB;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+.frozen {
+    color: #C0504D;
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #C0C0C0;
+    border-radius: 6px;
+    outline: none;
+}
+
+form input:focus {
+    outline: 2px solid #0F7C7C;
+}
+
+button {
+    background-color: #1F3864;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #12254F;
+}
+
+
+/* Responsive layout: 900px and below */
+@media (max-width: 900px) {
+    body {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    main {
+        width: 70%;
+    }
+    aside {
+        width: 30%;
+    }
+}
+
+
+@media (max-width: 600px) {
+    main, aside {
+        width: 100%;
+    }
+    nav, nav ul {
+        flex-direction: column;
+    }   
+    table {
+        font-size: 13px;
+    }
+}
