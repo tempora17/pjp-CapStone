@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loan Application - Meridian Retail Bank</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Meridian Retail Bank</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="index.html#=">Accounts</a></li>
+                <li><a href="index.html#">Transfers</a></li>
+                <li><a href="loan-apply.html">Loans</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="loan-page">
+        <section>
+            <h2>Loan Application</h2>
+            <form class="loan-form">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" name="fullName" minlength="3" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="10-digit mobile number">
+                <label for="loan-type">Loan Type</label>
+                <select id="loan-type" name="loanType" required>
+                    <option value="">Select Loan Type</option>
+                    <option value="home">Home Loan</option>
+                    <option value="personal">Personal Loan</option>
+                    <option value="education">Education Loan</option>
+                </select>
+                <label for="loan-amount">Loan Amount</label>
+                <input type="number" id="loan-amount" name="loanAmount" min="50000" max="5000000" step="1000" required>
+                <label for="annual-income">Annual Income</label>
+                <input type="number" id="annual-income" name="annualIncome" min="100000" required>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="declaration" name="declaration" required>
+                    I confirm the information provided is accurate
+                </label>
+                <button type="submit">Submit Application</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Meridian Retail Bank | Savoira Learning Platform</p>
+    </footer>
+</body>
+</html>
